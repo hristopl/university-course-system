@@ -1,0 +1,56 @@
+﻿@using WebProject.Entities
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Университетска система за курсове", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Начална страница", "Index", "Home")</li>
+                    @if (Session["loggedUser"] == null)
+                    {
+                        <li>@Html.ActionLink("Вход за Студенти", "LoginStudent", "Home")</li>
+                        <li>@Html.ActionLink("Вход за Учители", "LoginTeacher", "Home")</li>
+                        <li>@Html.ActionLink("Регистрация", "Register", "Students")</li>
+                    }
+                    else if (Session["loggedUser"] is Teacher)
+                    {
+                        <li>@Html.ActionLink("Излез", "Logout", "Home")</li>
+                        <li>@Html.ActionLink("Моите курсове", "Index", "Courses")</li>
+                    }
+                    else if (Session["loggedUser"] is Student)
+                    {
+                        <li>@Html.ActionLink("Излез", "Logout", "Home")</li>
+                        <li>@Html.ActionLink("Всички курсове", "Index", "Courses")</li>
+                        <li>@Html.ActionLink("Моите курсове", "StudentCourses", "Courses")</li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

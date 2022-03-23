@@ -1,0 +1,40 @@
+﻿@model WebProject.Entities.Course
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Изтриване</h2>
+
+<h3>Сигурни ли сте, че искате да изтриете?</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Teacher.TeacherFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Teacher.TeacherFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CourseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CourseName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Изтриване" class="btn btn-default" /> |
+            @Html.ActionLink("Връщане назад", "Index")
+        </div>
+    }
+</div>

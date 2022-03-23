@@ -1,0 +1,56 @@
+﻿@model IEnumerable<WebProject.Entities.Course>
+@using WebProject.Entities
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Курсове</h2>
+@if (Session["loggedUser"] is Teacher) {
+<p>
+    @Html.ActionLink("Създай нов курс", "Create")
+</p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Teacher.TeacherFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseName)
+        </th>
+        <th></th>
+    </tr>
+
+@if (Session["loggedUser"] is Student) {
+    foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Teacher.TeacherFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseName)
+        </td>
+        <td>
+            @Html.ActionLink("Запиши се за курса", "Sign", new { id=item.CourseId })
+        </td>
+    </tr>
+    }
+} else if (Session["loggedUser"] is Teacher) {
+    foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Teacher.TeacherFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseName)
+        </td>
+        <td>
+            @Html.ActionLink("Промени", "Edit", new { id=item.CourseId }) |
+            @Html.ActionLink("Детайли", "Details", new { id=item.CourseId }) |
+            @Html.ActionLink("Изтрий", "Delete", new { id=item.CourseId })
+        </td>
+    </tr>
+    }
+}
+</table>

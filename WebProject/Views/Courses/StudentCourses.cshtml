@@ -1,0 +1,29 @@
+﻿@model IEnumerable<WebProject.Entities.Course>
+@using WebProject.Entities
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Моите курсове</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseName)
+        </th>
+        <th></th>
+    </tr>
+
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.CourseName)
+    </td>
+    <td>
+        @Html.ActionLink("Отпиши се от курса", "UnSign", new { id=item.CourseId })
+    </td>
+</tr>
+}
+</table>

@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<td style="background-color:#e6e6e6;">
+    <fieldset>
+        <legend> Влизане като Студент </legend>
+
+        <form action="/Home/LoginStudent" method="post">
+            <span style="color:red;"> @ViewData["authError"] </span>
+            <table>
+                <tr>
+                    <td> Име: </td>
+                    <td>
+                        <input type="text" name="username" value="@ViewData["username"]" />
+                    </td>
+                    <td> <span style="color:red;"> @ViewData["usernameError"]</span> </td>
+                </tr>
+                <tr>
+                    <td> Парола: </td>
+                    <td>
+                        <input type="password" name="password" value="@ViewData["password"]" />
+                    </td>
+                    <td>  <span style="color:red;"> @ViewData["passwordError"]</span> </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Entry" style="float:right;" />
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+
+        </form>
+
+    </fieldset>
+</td>
+
+
